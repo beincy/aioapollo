@@ -6,3 +6,5 @@
 build/
 
 dist/
+
+aioapollo\.egg-info/
