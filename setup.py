@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='aioapollo',
-    version='0.0.1',
+    version='0.0.2',
     description=(
         '纯异步的apollo客户端，支持实时和延迟的获取配置信息',
         'Pure asynchronous Apollo client to support real-time and delayed access to configuration information'
