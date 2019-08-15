@@ -3,7 +3,6 @@ from enum import Enum
 from threading import Thread
 from datetime import datetime
 import asyncio
-import uvloop
 from urllib.parse import quote
 import ujson
 
@@ -169,7 +168,12 @@ class ApolloClient:
 
 
 def loopConfig():
-    asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+    try:
+        import uvloop
+        asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+    except ImportError:
+        pass
+
     asyncio.run(checkConfig())
 
 
@@ -194,10 +198,8 @@ async def checkConfig():
                     "baseUrl":
                     f'{conItem["serverUrl"]}/notifications/v2?appId={conItem["appId"]}&cluster={conItem["clusterName"]}',
                     "notifications": [{
-                        "namespaceName":
-                        conItem["namespaceName"],
-                        "notificationId":
-                        0
+                        "namespaceName": conItem["namespaceName"],
+                        "notificationId": 0
                     }],
                     "configItems": {
                         conItem["namespaceName"]: {
